@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMeans Clustering Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h3 class="text-center">Clustering Analysis Results</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <img src="data:image/png;base64,{{ plot_url }}" alt="KMeans Clustering Plot" class="img-fluid rounded">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Clustering Metrics</h5>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Silhouette Score</th>
+                                        <td>{{ "%.4f"|format(silhouette_score) }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Cluster Centroids</h5>
+                                <table class="table table-bordered">
+                                    {% for centroid in centroids %}
+                                    <tr>
+                                        <td>{{ "%.4f"|format(centroid[0]) }}</td>
+                                        <td>{{ "%.4f"|format(centroid[1]) }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a href="/#KMeans" class="btn btn-primary">Upload Another Dataset</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

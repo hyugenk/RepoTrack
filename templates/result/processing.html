@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preprocessing Results</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Preprocessing Results</h5>
+            </div>
+            <div class="card-body">
+                <!-- Overview Section -->
+                <div class="mb-4">
+                    <h6 class="card-subtitle mb-3">Dataset Overview</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title">Original Dataset</h6>
+                                    <p class="card-text">
+                                        Rows: {{ preprocessing_info.original_shape[0] }}<br>
+                                        Columns: {{ preprocessing_info.original_shape[1] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title">Preprocessed Dataset</h6>
+                                    <p class="card-text">
+                                        Rows: {{ preprocessing_info.final_shape[0] }}<br>
+                                        Columns: {{ preprocessing_info.final_shape[1] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preprocessing Steps Section -->
+                <div class="mb-4">
+                    <h6 class="card-subtitle mb-3">Preprocessing Steps</h6>
+                    <div class="accordion" id="preprocessingSteps">
+                        {% for step in preprocessing_info.steps_taken %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                        data-bs-target="#step{{ loop.index }}">
+                                    {% if step.step == 'remove_duplicates' %}
+                                        Duplicate Removal
+                                    {% elif step.step == 'format_dates' %}
+                                        Date Formatting
+                                    {% elif step.step == 'missing_columns' %}
+                                        Missing Date Columns
+                                    {% elif step.step == 'convert_numeric' %}
+                                        Numeric Conversion
+                                    {% endif %}
+                                </button>
+                            </h2>
+                            <div id="step{{ loop.index }}" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    {% if step.step == 'remove_duplicates' %}
+                                        <p>Removed {{ step.rows_removed }} duplicate rows</p>
+                                    {% elif step.step == 'format_dates' %}
+                                        <p>Format used: {{ step.format }}</p>
+                                        <p>Formatted columns:</p>
+                                        <ul>
+                                            {% for col in step.columns_formatted %}
+                                                <li>{{ col }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% elif step.step == 'missing_columns' %}
+                                        <p>{{ step.message }}:</p>
+                                        <ul>
+                                            {% for col in step.columns %}
+                                                <li>{{ col }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% elif step.step == 'convert_numeric' %}
+                                        {% if step.error %}
+                                            <p class="text-danger">{{ step.error }}</p>
+                                        {% else %}
+                                            <p>Successfully converted "{{ step.column }}" to {{ step.new_type }}</p>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Download Section -->
+                <div class="text-center">
+                    <a href="{{ url_for('download_csv', filename=output_file) }}" 
+                       class="btn btn-success">
+                        <i class="fas fa-download me-2"></i>Download Processed Dataset
+                    </a>
+                    <a href="/#preprocessing" class="btn btn-secondary ms-2">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Preprocessing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
