@@ -59,18 +59,18 @@ RepoTrack is ideal for:
    ```bash
    cd RepoTrack
 
-4. (Optional) Create a virtual environment to manage dependencies:
+3. (Optional) Create a virtual environment to manage dependencies:
    ```bash
   `python -m venv venv`
   `source venv/bin/activate   # On Linux/Mac`
   `venv\Scripts\activate      # On Windows`
 
-6. Install the required dependencies:
+4. Install the required dependencies:
    ```bash
    `pip install -1 requirements.txt`
 
-8. Run the Flask application:
+5. Run the Flask application:
    ```bash
    `pyhton app.py`
 
-10. ENJOY!
+6. ENJOY!
