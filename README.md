@@ -49,3 +49,24 @@ RepoTrack is ideal for:
 
 ---
 
+## How to Get Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/hyugenk/RepoTrack.git
+
+2. Navigate to the project directory:
+   `cd RepoTrack`
+
+3. (Optional) Create a virtual environment to manage dependencies:
+  `python -m venv venv`
+  `source venv/bin/activate   # On Linux/Mac`
+  `venv\Scripts\activate      # On Windows`
+
+4. Install the required dependencies:
+   `pip install -1 requirements.txt`
+
+5. Run the Flask application:
+   `pyhton app.py`
+
+6. ENJOY!
