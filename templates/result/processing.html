@@ -60,8 +60,6 @@
                                         Date Formatting
                                     {% elif step.step == 'missing_columns' %}
                                         Missing Date Columns
-                                    {% elif step.step == 'convert_numeric' %}
-                                        Numeric Conversion
                                     {% endif %}
                                 </button>
                             </h2>
@@ -84,12 +82,6 @@
                                                 <li>{{ col }}</li>
                                             {% endfor %}
                                         </ul>
-                                    {% elif step.step == 'convert_numeric' %}
-                                        {% if step.error %}
-                                            <p class="text-danger">{{ step.error }}</p>
-                                        {% else %}
-                                            <p>Successfully converted "{{ step.column }}" to {{ step.new_type }}</p>
-                                        {% endif %}
                                     {% endif %}
                                 </div>
                             </div>

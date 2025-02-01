@@ -423,21 +423,7 @@ def preprocess_dataset(file, options):
                     "message": "These date columns were not found in the dataset"
                 })
         
-        # Konversi tipe data numerik
-        if options.get('convert_numeric'):
-            if "Days Between First and Last Commit" in df.columns:
-                try:
-                    df["Days Between First and Last Commit"] = df["Days Between First and Last Commit"].astype(int)
-                    preprocessing_info["steps_taken"].append({
-                        "step": "convert_numeric",
-                        "column": "Days Between First and Last Commit",
-                        "new_type": "integer"
-                    })
-                except Exception as e:
-                    preprocessing_info["steps_taken"].append({
-                        "step": "convert_numeric",
-                        "error": f"Failed to convert Days Between First and Last Commit: {str(e)}"
-                    })
+    
         
         preprocessing_info["final_shape"] = df.shape
         
@@ -458,7 +444,7 @@ def handle_preprocessing():
     options = {
         'remove_duplicates': request.form.get('remove_duplicates') == 'on',
         'format_dates': request.form.get('format_dates') == 'on',
-        'convert_numeric': request.form.get('convert_numeric') == 'on'
+        # 'convert_numeric': request.form.get('convert_numeric') == 'on'
     }
     print(f"x::{options}")
     processed_df, preprocessing_info = preprocess_dataset(file, options)
@@ -478,6 +464,7 @@ def handle_preprocessing():
 @app.route('/download/<filename>')
 def download_csv(filename):
     try:
+        filepath = f"./downloads/{filename}"
         return send_file(
             filename,
             mimetype='text/csv',
