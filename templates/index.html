@@ -204,6 +204,10 @@
                         <form action="/silhouette" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
                             <div class="mb-3">
                                 <label for="fileUpload" class="form-label">Upload Dataset (CSV)</label>
+                                <small class="form-text text-muted"><br>Format Columns: 
+                                    account_created_at,
+                                    first_commit_date,
+                                    last_commit_date
                                 <input class="form-control" type="file" id="fileUpload" name="file" accept=".csv"
                                     required>
                             </div>
