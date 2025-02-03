@@ -30,15 +30,20 @@
                             </div>
                             <div class="col-md-6">
                                 <h5>Cluster Centroids</h5>
-                                <table class="table table-bordered">
-                                    {% for centroid in centroids %}
-                                    <tr>
-                                        <td>{{ "%.4f"|format(centroid[0]) }}</td>
-                                        <td>{{ "%.4f"|format(centroid[1]) }}</td>
-                                    </tr>
+                                <div>
+                                    {% for centroid in centroid_values %}
+                                        <div class="mb-3">
+                                            <h6>Cluster {{ loop.index0 }}</h6>
+                                            <ul>
+                                                {% for feature, value in centroid.items() %}
+                                                    <li><strong>{{ feature }}:</strong> {{ value }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     {% endfor %}
-                                </table>
+                                </div>
                             </div>
+                            
                         </div>
                         <div class="text-center">
                             <a href="/#KMeans" class="btn btn-primary">Upload Another Dataset</a>
