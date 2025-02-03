@@ -28,7 +28,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for clusters, score in zip(clusters_range, silhouette_scores) %}
+                                    {% for clusters, score in zip(k_values, silhouette_scores) %}
                                     <tr>
                                         <td>{{ clusters }}</td>
                                         <td>{{ "%.4f"|format(score) }}</td>

@@ -10,7 +10,6 @@ from KMeans import *
 from SilhouetteScore import *
 
 
-
 app = Flask(__name__)
 
 def get_all_commits(owner, repo, username, token):

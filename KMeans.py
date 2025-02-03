@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import io
 import base64
 
+
 def analisis_kmeans():
     # Check if file is uploaded
     if 'file' not in request.files:
@@ -23,7 +24,7 @@ def analisis_kmeans():
     X = df[features]
     
     # Apply K-Means with user-specified k
-    kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=300)
     kmeans.fit(X)
 
     # Get centroids

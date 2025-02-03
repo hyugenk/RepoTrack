@@ -205,9 +205,9 @@
                             <div class="mb-3">
                                 <label for="fileUpload" class="form-label">Upload Dataset (CSV)</label>
                                 <small class="form-text text-muted"><br>Format Columns: 
-                                    account_created_at,
-                                    first_commit_date,
-                                    last_commit_date
+                                    total_contributors, total_open_issues, total_closed_issues,
+                                    total_stars, total_forks, total_commits, days_since_last_commit
+                                </small>
                                 <input class="form-control" type="file" id="fileUpload" name="file" accept=".csv"
                                     required>
                             </div>
@@ -233,6 +233,10 @@
                         <form action="/analisis" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
                             <div class="mb-3">
                                 <label for="fileUpload" class="form-label">Upload Dataset (CSV)</label>
+                                <small class="form-text text-muted"><br>Format Columns: 
+                                    total_contributors, total_open_issues, total_closed_issues,
+                                    total_stars, total_forks, total_commits, days_since_last_commit
+                                </small>
                                 <input class="form-control" type="file" id="fileUpload" name="file" accept=".csv"
                                     required>
                             </div>
